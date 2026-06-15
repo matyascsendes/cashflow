@@ -359,7 +359,7 @@ function buildTable() {
     const avg = catAvg(c.id);
     const diff = bdg - avg;
     rows += `<tr>`;
-    rows += `<td>${c.short}</td>`;
+    rows += `<td>${c.id}</td>`;
     ms.forEach(m => {
       const v = DATA[m]?.[c.id] || 0;
       let cls = '';
