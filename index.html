@@ -415,7 +415,7 @@ function closeDrilldown() {
 // ── CHARTS ────────────────────────────────────────────────────────────────
 const CAT_COLORS = {
   '4 - FOOD & DRINK':'rgba(248,113,113,0.7)',
-  '8 - EDUCATION':'rgba(96,165,250,0.7)',
+  '8 - EDUCATION':'rgba(168,85,247,0.7)',
   '9 - HEALTH & PERSONAL CARE':'rgba(251,191,36,0.7)',
   '5 - HOME & UTILITIES':'rgba(167,139,250,0.7)',
   '6 - HOUSEHOLD':'rgba(251,146,60,0.7)',
@@ -431,7 +431,7 @@ const CAT_COLORS = {
   '18 - OTHER':'rgba(107,114,128,0.7)',
   '19 - COST OF DOING BUSINESS':'rgba(168,85,247,0.7)',
   '1 - LOANS':'rgba(100,116,139,0.7)',
-  '2 - BNB':'rgba(148,163,184,0.5)',
+  '2 - BNB':'rgba(255,56,92,0.75)',
   '20 - ONE OFF':'rgba(251,113,133,0.8)',
   '21 - NANNY':'rgba(192,132,252,0.7)',
   '22 - TECH':'rgba(99,102,241,0.7)'
@@ -483,15 +483,10 @@ function buildMonthlyChart() {
       plugins: {
         legend: { display: false },
         tooltip: {
-          mode: 'index',
+          mode: 'nearest',
+          intersect: true,
           callbacks: {
             label: c => c.parsed.y > 0 ? `${c.dataset.label}: €${Math.round(c.parsed.y).toLocaleString()}` : null,
-            footer: items => {
-              const cost = items.filter(i=>i.dataset.stack==='expenses').reduce((s,i)=>s+i.parsed.y,0);
-              const rev  = items.filter(i=>i.dataset.stack==='revenue').reduce((s,i)=>s+i.parsed.y,0);
-              const net  = rev - cost;
-              return [`Cost: €${Math.round(cost).toLocaleString()}`, `Revenue: €${Math.round(rev).toLocaleString()}`, `P&L: ${net>=0?'+':''}€${Math.round(net).toLocaleString()}`];
-            }
           },
           filter: i => i.parsed.y > 0
         }
