@@ -427,7 +427,12 @@ const CAT_COLORS = {
   '15 - LEGO':'rgba(250,204,21,0.7)',
   '17 - SPORT':'rgba(34,197,94,0.5)',
   '18 - OTHER':'rgba(107,114,128,0.7)',
-  '19 - COST OF DOING BUSINESS':'rgba(168,85,247,0.7)'
+  '19 - COST OF DOING BUSINESS':'rgba(168,85,247,0.7)',
+  '1 - LOANS':'rgba(100,116,139,0.7)',
+  '2 - BNB':'rgba(148,163,184,0.5)',
+  '20 - ONE OFF':'rgba(251,113,133,0.8)',
+  '21 - NANNY':'rgba(20,184,166,0.7)',
+  '22 - TECH':'rgba(99,102,241,0.7)'
 };
 
 function buildMonthlyChart() {
@@ -456,14 +461,14 @@ function buildMonthlyChart() {
   datasets.push({
     label: 'Budapest rev',
     data: ms.map(m => REVENUE[m]?.budapest || 0),
-    backgroundColor: 'rgba(74,222,128,0.55)',
+    backgroundColor: 'rgba(74,222,128,0.85)',
     borderWidth: 0, borderRadius: 2,
     stack: 'revenue'
   });
   datasets.push({
     label: 'Dubai net',
     data: ms.map(m => REVENUE[m]?.dubai || 0),
-    backgroundColor: 'rgba(245,158,11,0.7)',
+    backgroundColor: 'rgba(245,158,11,0.9)',
     borderWidth: 0, borderRadius: 2,
     stack: 'revenue'
   });
@@ -496,20 +501,28 @@ function buildMonthlyChart() {
     }
   });
 
-  // P&L row below chart
+  // P&L rows below chart
   const pnlEl = document.getElementById('pnl-row');
   if (!pnlEl) return;
-  const colW = 'flex:1;min-width:70px;text-align:center;padding:6px 4px';
-  let html = `<div style="${colW};color:#3a3a3a">P&amp;L</div>`;
+  const colW = 'flex:1;min-width:70px;text-align:center;padding:4px 4px';
+  const labelW = 'flex:1;min-width:70px;text-align:left;padding:4px 6px;color:#3a3a3a';
+
+  let html1 = `<div style="${labelW}">P&amp;L</div>`;
+  let html2 = `<div style="${labelW}">excl. one-off</div>`;
+
   ms.forEach(m => {
-    const cost = CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
-    const rev  = (REVENUE[m]?.budapest||0) + (REVENUE[m]?.dubai||0);
-    const net  = rev - cost;
-    const col  = net >= 0 ? '#4ade80' : '#f87171';
-    const sign = net >= 0 ? '+' : '';
-    html += `<div style="${colW};color:${col};font-weight:600">${sign}€${Math.round(net).toLocaleString()}</div>`;
+    const cost    = CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
+    const oneoff  = DATA[m]?.['20 - ONE OFF'] || 0;
+    const rev     = (REVENUE[m]?.budapest||0) + (REVENUE[m]?.dubai||0);
+    const net     = rev - cost;
+    const netEx   = rev - (cost - oneoff);
+    const col1    = net   >= 0 ? '#4ade80' : '#f87171';
+    const col2    = netEx >= 0 ? '#4ade80' : '#f87171';
+    const fmt = v => (v>=0?'+':'') + '€' + Math.round(v).toLocaleString();
+    html1 += `<div style="${colW};color:${col1};font-weight:600">${fmt(net)}</div>`;
+    html2 += `<div style="${colW};color:${col2};font-weight:500;opacity:.75">${fmt(netEx)}</div>`;
   });
-  pnlEl.innerHTML = html;
+  pnlEl.innerHTML = html1 + '<div style="width:100%;height:1px;background:rgba(255,255,255,0.04);margin:2px 0"></div>' + html2;
 }
 
 
