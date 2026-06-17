@@ -8,6 +8,7 @@
       "4 - FOOD & DRINK": 1380.77,
       "6 - HOUSEHOLD": 164.87,
       "9 - HEALTH & PERSONAL CARE": 10.46,
+      "20 - ONE OFF": 7574.61,
       "16 - LEISURE": 162.45,
       "10 - CLOTHING": 88.2,
       "13 - HEETS": 192.0,
@@ -24,6 +25,7 @@
       "6 - HOUSEHOLD": 699.69,
       "5 - HOME & UTILITIES": 804.29,
       "4 - FOOD & DRINK": 1182.85,
+      "20 - ONE OFF": 18949.32,
       "9 - HEALTH & PERSONAL CARE": 255.25,
       "10 - CLOTHING": 148.4,
       "2 - BNB": 11281.35,
@@ -41,6 +43,7 @@
       "16 - LEISURE": 189.63,
       "12 - TRANSPORT": 31.75,
       "6 - HOUSEHOLD": 303.92,
+      "20 - ONE OFF": 6572.04,
       "4 - FOOD & DRINK": 1168.48,
       "5 - HOME & UTILITIES": 541.28,
       "15 - LEGO": 196.03,
@@ -67,6 +70,7 @@
       "12 - TRANSPORT": 867.88,
       "15 - LEGO": 89.98,
       "14 - GIFT": 40.06,
+      "20 - ONE OFF": 1470.55,
       "10 - CLOTHING": 69.68,
       "17 - SPORT": 51.96,
       "8 - EDUCATION": 2355.99,
@@ -78,6 +82,7 @@
       "4 - FOOD & DRINK": 1564.75,
       "19 - COST OF DOING BUSINESS": 91.41,
       "5 - HOME & UTILITIES": 621.75,
+      "20 - ONE OFF": 19322.17,
       "14 - GIFT": 218.0,
       "12 - TRANSPORT": 46.5,
       "2 - BNB": 10699.67,
@@ -93,6 +98,7 @@
       "16 - LEISURE": 278.15,
       "9 - HEALTH & PERSONAL CARE": 570.3,
       "4 - FOOD & DRINK": 902.94,
+      "20 - ONE OFF": 1523.82,
       "5 - HOME & UTILITIES": 832.47,
       "19 - COST OF DOING BUSINESS": 65.35,
       "10 - CLOTHING": 153.12,
@@ -109,6 +115,7 @@
       "8 - EDUCATION": 2335.99
     },
     "2026-03": {
+      "20 - ONE OFF": 1424.69,
       "4 - FOOD & DRINK": 1499.04,
       "5 - HOME & UTILITIES": 505.54,
       "19 - COST OF DOING BUSINESS": 25.88,
@@ -157,6 +164,7 @@
       "16 - LEISURE": 291.44,
       "12 - TRANSPORT": 152.46,
       "10 - CLOTHING": 131.9,
+      "20 - ONE OFF": 240.0,
       "3 - INVESTMENT": 32.91
     },
     "2026-06": {
@@ -176,5 +184,5 @@
       "3 - INVESTMENT": 33.75
     }
   },
-  "updated": "2026-06-17T20:38:11.354187Z"
+  "updated": "2026-06-17T20:46:48.129902Z"
 }
