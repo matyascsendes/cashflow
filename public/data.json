@@ -55,7 +55,8 @@
       "10 - CLOTHING": 29.95,
       "13 - HEETS": 144.0,
       "8 - EDUCATION": 3105.76,
-      "3 - INVESTMENT": 30.96
+      "3 - INVESTMENT": 30.96,
+      "1 - LOANS": 528
     },
     "2025-12": {
       "4 - FOOD & DRINK": 1444.48,
@@ -74,7 +75,8 @@
       "10 - CLOTHING": 69.68,
       "17 - SPORT": 51.96,
       "8 - EDUCATION": 2355.99,
-      "3 - INVESTMENT": 31.5
+      "3 - INVESTMENT": 31.5,
+      "1 - LOANS": 528
     },
     "2026-01": {
       "6 - HOUSEHOLD": 357.45,
@@ -92,7 +94,8 @@
       "17 - SPORT": 182.95,
       "18 - OTHER": 0.13,
       "3 - INVESTMENT": 31.26,
-      "8 - EDUCATION": 2374.99
+      "8 - EDUCATION": 2374.99,
+      "1 - LOANS": 528
     },
     "2026-02": {
       "16 - LEISURE": 278.15,
@@ -165,7 +168,8 @@
       "12 - TRANSPORT": 152.46,
       "10 - CLOTHING": 131.9,
       "20 - ONE OFF": 240.0,
-      "3 - INVESTMENT": 32.91
+      "3 - INVESTMENT": 32.91,
+      "1 - LOANS": 528
     },
     "2026-06": {
       "5 - HOME & UTILITIES": 1144.89,
@@ -181,8 +185,9 @@
       "9 - HEALTH & PERSONAL CARE": 37.26,
       "13 - HEETS": 100.0,
       "12 - TRANSPORT": 803.42,
-      "3 - INVESTMENT": 33.75
+      "3 - INVESTMENT": 33.75,
+      "1 - LOANS": 528
     }
   },
-  "updated": "2026-06-17T20:46:48.129902Z"
+  "updated": "2026-06-17T20:48:19.339121Z"
 }
