@@ -16,6 +16,7 @@
       "18 - OTHER": 35.6,
       "5 - HOME & UTILITIES": 499.2,
       "8 - EDUCATION": 1981.09,
+      "1 - LOANS": 518.2,
       "15 - LEGO": 15.27,
       "3 - INVESTMENT": 30.36
     },
@@ -28,6 +29,7 @@
       "2 - BNB": 11281.35,
       "16 - LEISURE": 281.92,
       "19 - COST OF DOING BUSINESS": 45.57,
+      "1 - LOANS": 1546.95,
       "13 - HEETS": 144.0,
       "7 - ECA": 100.0,
       "14 - GIFT": 70.8,
@@ -47,6 +49,7 @@
       "9 - HEALTH & PERSONAL CARE": 492.56,
       "19 - COST OF DOING BUSINESS": 10.6,
       "7 - ECA": 100.0,
+      "1 - LOANS": 364.58,
       "10 - CLOTHING": 29.95,
       "13 - HEETS": 144.0,
       "8 - EDUCATION": 3105.76,
@@ -85,7 +88,8 @@
       "17 - SPORT": 182.95,
       "18 - OTHER": 0.13,
       "3 - INVESTMENT": 31.26,
-      "8 - EDUCATION": 2374.99
+      "8 - EDUCATION": 2374.99,
+      "1 - LOANS": 547.01
     },
     "2026-02": {
       "16 - LEISURE": 278.15,
@@ -102,6 +106,7 @@
       "15 - LEGO": 229.99,
       "14 - GIFT": 20.48,
       "18 - OTHER": 0.35,
+      "1 - LOANS": 538.65,
       "3 - INVESTMENT": 220.5,
       "8 - EDUCATION": 2335.99
     },
@@ -118,6 +123,7 @@
       "13 - HEETS": 150.0,
       "7 - ECA": 100.0,
       "10 - CLOTHING": 40.8,
+      "1 - LOANS": 526.0,
       "8 - EDUCATION": 2342.0,
       "3 - INVESTMENT": 21.04
     },
@@ -128,6 +134,7 @@
       "5 - HOME & UTILITIES": 856.52,
       "10 - CLOTHING": 127.13,
       "19 - COST OF DOING BUSINESS": 81.82,
+      "1 - LOANS": 1956.61,
       "12 - TRANSPORT": 220.31,
       "16 - LEISURE": 753.41,
       "14 - GIFT": 51.99,
@@ -152,6 +159,7 @@
       "16 - LEISURE": 291.44,
       "12 - TRANSPORT": 152.46,
       "10 - CLOTHING": 131.9,
+      "1 - LOANS": 589.94,
       "3 - INVESTMENT": 32.91
     },
     "2026-06": {
@@ -168,8 +176,9 @@
       "9 - HEALTH & PERSONAL CARE": 37.26,
       "13 - HEETS": 100.0,
       "12 - TRANSPORT": 803.42,
+      "1 - LOANS": 179.22,
       "3 - INVESTMENT": 33.75
     }
   },
-  "updated": "2026-06-17T00:00:00.000Z"
+  "updated": "2026-06-17T20:17:22.263692Z"
 }
