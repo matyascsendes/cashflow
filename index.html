@@ -161,7 +161,7 @@ thead th.cur-month{color:#4ade80!important}
           <div class="chart-title">Monthly spend &amp; Revenue</div>
           <div class="chart-sub">Stacked costs · revenue bar · P&amp;L below</div>
         </div>
-        <div class="filter-row" id="cat-filters"></div>
+        <div class="filter-row" id="cat-filters"><button id="btn-oneoff" class="filter-btn" onclick="toggleOneOff()">Excl. One-Off</button></div>
       </div>
       <div class="legend">
         <span style="display:flex;align-items:center;gap:5px"><span class="leg-dot" style="background:#f87171"></span>Food & Drink</span>
@@ -272,6 +272,8 @@ const MO_LABELS = {'2025-09':'Sep','2025-10':'Oct','2025-11':'Nov','2025-12':'De
 
 let DATA = JSON.parse(JSON.stringify(MONTHLY_RAW)); // mutable, replaced by API data
 let REVENUE = {};
+let excludeOneOff = false;
+let monthlyChartInst = null;
 
 // ── UTILS ─────────────────────────────────────────────────────────────────
 const fmt = v => v === 0 ? '—' : '€' + Math.round(v).toLocaleString();
@@ -438,12 +440,20 @@ const CAT_COLORS = {
   '22 - TECH':'rgba(99,102,241,0.7)'
 };
 
+function toggleOneOff() {
+  excludeOneOff = !excludeOneOff;
+  const btn = document.getElementById('btn-oneoff');
+  if (btn) btn.classList.toggle('active', excludeOneOff);
+  buildMonthlyChart();
+}
+
 function buildMonthlyChart() {
   const ms = months();
   const labels = ms.map(m => MO_LABELS[m] || m);
 
   // Expense stacked datasets
-  const datasets = CATS.map(c => ({
+  const activeCats = excludeOneOff ? CATS.filter(c => c.id !== '20 - ONE OFF') : CATS;
+  const datasets = activeCats.map(c => ({
     label: c.short,
     data: ms.map(m => DATA[m]?.[c.id] || 0),
     backgroundColor: CAT_COLORS[c.id] || 'rgba(150,150,150,0.5)',
@@ -476,7 +486,8 @@ function buildMonthlyChart() {
     stack: 'revenue'
   });
 
-  new Chart(document.getElementById('monthlyChart').getContext('2d'), {
+  if (monthlyChartInst) { monthlyChartInst.destroy(); }
+  monthlyChartInst = new Chart(document.getElementById('monthlyChart').getContext('2d'), {
     type: 'bar',
     data: { labels, datasets },
     options: {
@@ -507,14 +518,16 @@ function buildMonthlyChart() {
   const labelW = 'min-width:70px;padding:4px 6px;color:#3a3a3a';
 
   let html1 = `<div style="${labelW}">P&amp;L</div>`;
-  let html2 = `<div style="${labelW}">excl. one-off</div>`;
+  const row2Label = excludeOneOff ? 'incl. one-off' : 'excl. one-off';
+  let html2 = `<div style="${labelW}">${row2Label}</div>`;
 
   ms.forEach(m => {
     const cost   = CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
     const oneoff = DATA[m]?.['20 - ONE OFF'] || 0;
     const rev    = (REVENUE[m]?.budapest||0) + (REVENUE[m]?.dubai||0);
-    const net    = rev - cost;
-    const netEx  = rev - (cost - oneoff);
+    const cost2   = CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
+    const net    = rev - (excludeOneOff ? cost2 : cost);
+    const netEx  = excludeOneOff ? rev - cost2 : rev - (cost - oneoff);
     const fmt    = v => (v>=0?'+':'') + '€' + Math.round(v).toLocaleString();
     html1 += `<div style="${colW};color:${net>=0?'#4ade80':'#f87171'};font-weight:600">${fmt(net)}</div>`;
     html2 += `<div style="${colW};color:${netEx>=0?'#4ade80':'#f87171'}">${fmt(netEx)}</div>`;
