@@ -143,9 +143,9 @@ thead th.cur-month{color:#4ade80!important}
       <div class="kpi-sub" id="kpi-thismonth-sub">partial month</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">vs budget</div>
-      <div class="kpi-value" id="kpi-vs-budget">—</div>
-      <div class="kpi-sub" id="kpi-vs-budget-sub">budget: —</div>
+      <div class="kpi-label">One-off total</div>
+      <div class="kpi-value" id="kpi-oneoff">—</div>
+      <div class="kpi-sub" id="kpi-oneoff-sub">Sep 25 – today</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">6m avg / month</div>
@@ -303,10 +303,9 @@ function initKPIs() {
   document.getElementById('kpi-thismonth').textContent = fmt(total);
   document.getElementById('kpi-thismonth').className = 'kpi-value';
 
-  const vsEl = document.getElementById('kpi-vs-budget');
-  vsEl.textContent = (diff >= 0 ? '–€' : '+€') + Math.round(Math.abs(diff)).toLocaleString();
-  vsEl.className = 'kpi-value ' + (diff >= 0 ? 'green' : 'red');
-  document.getElementById('kpi-vs-budget-sub').textContent = 'budget: €' + Math.round(bdgt).toLocaleString();
+  const oneoff = months().reduce((s,m) => s + (DATA[m]?.['20 - ONE OFF']||0), 0);
+  document.getElementById('kpi-oneoff').textContent = '€' + Math.round(oneoff).toLocaleString();
+  document.getElementById('kpi-oneoff-sub').textContent = Math.round(oneoff/months().length).toLocaleString() + '/mo avg · ' + months().length + ' months';
 
   const prevMs = months().filter(m => m !== cur);
   const avg = prevMs.length ? prevMs.reduce((s,m) => s + monthTotal(m), 0) / prevMs.length : 0;
