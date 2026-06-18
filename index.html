@@ -542,14 +542,17 @@ function buildOverviewChart() {
   const bdgTot = budgetTotal();
   const EXCL = new Set(['2 - BNB', '20 - ONE OFF']);
 
-  const spendExcl = ms.map(m => {
-    return CATS.reduce((s, c) => EXCL.has(c.id) ? s : s + (DATA[m]?.[c.id] || 0), 0);
-  });
+  const spendExcl = ms.map(m =>
+    CATS.reduce((s, c) => EXCL.has(c.id) ? s : s + (DATA[m]?.[c.id] || 0), 0)
+  );
   const netIncome = ms.map(m => {
     const rev = (REVENUE[m]?.budapest || 0) + (REVENUE[m]?.dubai || 0);
     const cost = CATS.reduce((s, c) => s + (DATA[m]?.[c.id] || 0), 0);
     return rev - cost;
   });
+  const netColors = netIncome.map((v, i) =>
+    v >= spendExcl[i] ? 'rgba(74,222,128,0.75)' : 'rgba(248,113,113,0.75)'
+  );
 
   new Chart(document.getElementById('overviewChart').getContext('2d'), {
     type: 'bar',
@@ -557,27 +560,25 @@ function buildOverviewChart() {
       labels,
       datasets: [
         {
-          label: 'Spend excl. one-off & BNB',
-          data: spendExcl,
-          backgroundColor: 'rgba(96,165,250,0.55)',
+          label: 'Net income',
+          data: netIncome,
+          backgroundColor: netColors,
           borderWidth: 0, borderRadius: 3,
           order: 2
         },
         {
-          type: 'line', label: 'Net income',
-          data: netIncome,
-          borderColor: netIncome.map(v => v >= 0 ? '#4ade80' : '#f87171'),
-          backgroundColor: netIncome.map(v => v >= 0 ? 'rgba(74,222,128,0.15)' : 'rgba(248,113,113,0.15)'),
-          borderWidth: 2, pointRadius: 3, fill: false, tension: 0.3,
-          segment: { borderColor: ctx => ctx.p1.parsed.y >= 0 ? '#4ade80' : '#f87171' },
-          order: 1
+          label: 'Spend excl. one-off & BNB',
+          data: spendExcl,
+          backgroundColor: 'rgba(96,165,250,0.45)',
+          borderWidth: 0, borderRadius: 3,
+          order: 3
         },
         {
           type: 'line', label: 'Budget',
           data: ms.map(() => bdgTot),
           borderColor: 'rgba(255,255,255,0.3)', borderWidth: 1.5,
           borderDash: [4, 3], pointRadius: 0, fill: false, tension: 0,
-          order: 0
+          order: 1
         }
       ]
     },
