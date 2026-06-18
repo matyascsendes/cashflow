@@ -3,6 +3,7 @@
 <div class="sidenav-logo">mmmmn<span>.net</span></div>
 <div class="sidenav-section">Income</div>
 <a href="https://mmmmn.net/gg" data-path="/gg"><svg class="sidenav-icon" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="8" width="3" height="7" rx=".5"/><rect x="6.5" y="5" width="3" height="10" rx=".5"/><rect x="12" y="2" width="3" height="13" rx=".5"/></svg>Budapest</a>
+<a href="https://mmmmn.net/gg/report" data-path="/gg/report" style="padding-left:32px;font-size:11px;opacity:.7"><svg class="sidenav-icon" viewBox="0 0 16 16" fill="currentColor" style="width:12px;height:12px"><path d="M3 2a1 1 0 011-1h6l3 3v10a1 1 0 01-1 1H4a1 1 0 01-1-1V2z" opacity=".3"/><path d="M9 1v3h3M5 7h6M5 9.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg>BP Report</a>
 <a href="https://mmmmn.net/dubai" data-path="/dubai"><svg class="sidenav-icon" viewBox="0 0 16 16" fill="currentColor"><rect x="6" y="1" width="4" height="14" rx=".5"/><rect x="3" y="5" width="3" height="10" rx=".5"/><rect x="10" y="5" width="3" height="10" rx=".5"/></svg>Dubai</a>
 <div class="sidenav-section">Plantio</div>
 <a href="https://mmmmn.net/water" data-path="/water"><svg class="sidenav-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2C8 2 3 7 3 10.5C3 13.1 5.2 15 8 15s5-1.9 5-4.5C13 7 8 2 8 2z"/></svg>Water</a>
