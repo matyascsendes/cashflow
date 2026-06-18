@@ -518,16 +518,14 @@ function buildMonthlyChart() {
   const labelW = 'min-width:70px;padding:4px 6px;color:#3a3a3a';
 
   let html1 = `<div style="${labelW}">P&amp;L</div>`;
-  const row2Label = excludeOneOff ? 'incl. one-off' : 'excl. one-off';
-  let html2 = `<div style="${labelW}">${row2Label}</div>`;
+  let html2 = `<div style="${labelW}">excl. one-off</div>`;
 
   ms.forEach(m => {
     const cost   = CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
     const oneoff = DATA[m]?.['20 - ONE OFF'] || 0;
     const rev    = (REVENUE[m]?.budapest||0) + (REVENUE[m]?.dubai||0);
-    const cost2   = CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
-    const net    = rev - (excludeOneOff ? cost2 : cost);
-    const netEx  = excludeOneOff ? rev - cost2 : rev - (cost - oneoff);
+    const net    = rev - cost;
+    const netEx  = rev - (cost - oneoff);
     const fmt    = v => (v>=0?'+':'') + '€' + Math.round(v).toLocaleString();
     html1 += `<div style="${colW};color:${net>=0?'#4ade80':'#f87171'};font-weight:600">${fmt(net)}</div>`;
     html2 += `<div style="${colW};color:${netEx>=0?'#4ade80':'#f87171'}">${fmt(netEx)}</div>`;
