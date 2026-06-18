@@ -127,6 +127,7 @@ thead th.cur-month{color:#4ade80!important}
   </div>
   <div class="tabs">
     <button class="tab active" onclick="switchTab('toshl',this)">TOSHL</button>
+    <button class="tab" onclick="switchTab('revenue',this)">REVENUE</button>
   </div>
 </header>
 
@@ -148,9 +149,9 @@ thead th.cur-month{color:#4ade80!important}
       <div class="kpi-sub" id="kpi-oneoff-sub">Sep 25 – today</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">6m avg cost / month</div>
+      <div class="kpi-label">Monthly avg cost</div>
       <div class="kpi-value" id="kpi-avg">—</div>
-      <div class="kpi-sub">total cost · excl. current month</div>
+      <div class="kpi-sub" id="kpi-avg-sub">Sep 25 – today · excl. current</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">P&amp;L excl. one-off</div>
@@ -229,6 +230,29 @@ thead th.cur-month{color:#4ade80!important}
   </div>
 
 </div><!-- /tab-toshl -->
+
+<!-- REVENUE TAB -->
+<div class="tab-panel" id="tab-revenue">
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title" style="margin-bottom:4px">Revenue reconciliation</div>
+    <div style="font-size:12px;color:#5e5d59;margin-bottom:16px">GG reported (dashboard) vs Toshl actual (Empire payouts) · diff = timing or missing</div>
+    <div class="table-wrap">
+      <table id="rev-recon-table" style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="color:#5e5d59;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.5px;text-transform:uppercase">
+            <th style="text-align:left;padding:8px 12px">Month</th>
+            <th style="text-align:right;padding:8px 12px">GG Reported</th>
+            <th style="text-align:right;padding:8px 12px">Toshl Actual</th>
+            <th style="text-align:right;padding:8px 12px">Diff</th>
+          </tr>
+        </thead>
+        <tbody id="rev-recon-body">
+          <tr><td colspan="4" style="padding:20px;text-align:center;color:#5e5d59">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div><!-- /tab-revenue -->
 
 </div><!-- /content -->
 
@@ -604,7 +628,40 @@ async function loadGitHubData() {
       const upd = json.updated ? new Date(json.updated) : new Date();
       document.getElementById('last-updated').textContent = 'Auto · ' + upd.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
     }
+    buildRevenueRecon(json.revenue || {}, json.toshl_revenue || {});
   } catch(e) { console.warn('GitHub data fetch failed, using embedded data:', e.message); }
+}
+
+function buildRevenueRecon(ggRev, toshlRev) {
+  const allMonths = [...new Set([...Object.keys(ggRev), ...Object.keys(toshlRev)])].sort();
+  if (!allMonths.length) return;
+  const MO = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let html = '', totGG = 0, totToshl = 0;
+  for (const ym of allMonths) {
+    const gg = ggRev[ym]?.budapest || 0;
+    const actual = toshlRev[ym] || 0;
+    const diff = actual - gg;
+    totGG += gg; totToshl += actual;
+    const [y, m] = ym.split('-');
+    const label = MO[+m-1] + ' ' + y;
+    const diffColor = diff === 0 ? '#5e5d59' : diff > 0 ? '#4ade80' : '#f87171';
+    const diffStr = diff === 0 ? '—' : (diff > 0 ? '+' : '') + '€' + Math.round(diff).toLocaleString('hu');
+    html += `<tr style="border-top:1px solid rgba(255,255,255,0.05)">
+      <td style="padding:9px 12px;color:#9ca3af">${label}</td>
+      <td style="padding:9px 12px;text-align:right;color:#e5e7eb">${gg ? '€'+Math.round(gg).toLocaleString('hu') : '—'}</td>
+      <td style="padding:9px 12px;text-align:right;color:#4ade80">${actual ? '€'+Math.round(actual).toLocaleString('hu') : '—'}</td>
+      <td style="padding:9px 12px;text-align:right;color:${diffColor};font-weight:600">${diffStr}</td>
+    </tr>`;
+  }
+  const totDiff = totToshl - totGG;
+  const totDiffColor = totDiff === 0 ? '#5e5d59' : totDiff > 0 ? '#4ade80' : '#f87171';
+  html += `<tr style="border-top:2px solid rgba(255,255,255,0.12);font-weight:600">
+    <td style="padding:10px 12px;color:#fff">TOTAL</td>
+    <td style="padding:10px 12px;text-align:right;color:#e5e7eb">€${Math.round(totGG).toLocaleString('hu')}</td>
+    <td style="padding:10px 12px;text-align:right;color:#4ade80">€${Math.round(totToshl).toLocaleString('hu')}</td>
+    <td style="padding:10px 12px;text-align:right;color:${totDiffColor}">${totDiff>=0?'+':''}€${Math.round(totDiff).toLocaleString('hu')}</td>
+  </tr>`;
+  document.getElementById('rev-recon-body').innerHTML = html;
 }
 
 initKPIs();
