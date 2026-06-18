@@ -298,6 +298,7 @@ function buildTable() {
   const cur = curMonth();
   const head = document.getElementById('table-head');
   const body = document.getElementById('table-body');
+  if (!head || !body) return;
 
   // Header
   let htr = '<tr><th>Category</th>';
@@ -351,6 +352,7 @@ function buildTable() {
 
 // ── DRILLDOWN ─────────────────────────────────────────────────────────────
 function drilldown(catId, month) {
+  if (!document.getElementById('drilldown')) return;
   const cat = CATS.find(c => c.id === catId);
   const label = MO_LABELS[month] || month;
   document.getElementById('drilldown-title').textContent = `${cat.short} · ${label} ${month.split('-')[0]}`;
@@ -560,6 +562,7 @@ function buildOverviewChart() {
 }
 
 function buildCatCharts() {
+  if (!document.getElementById('catAvgChart')) return;
   const ms = months().filter(m => m !== curMonth());
   const labels = CATS.map(c => c.short);
   const avgs = CATS.map(c => catAvg(c.id));
