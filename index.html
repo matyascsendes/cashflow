@@ -154,7 +154,7 @@ thead th.cur-month{color:#4ade80!important}
       <div class="kpi-sub" id="kpi-oneoff-sub">Sep 25 – today</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">P&amp;L excl. one-off</div>
+      <div class="kpi-label">P&amp;L excl. one-off &amp; BNB</div>
       <div class="kpi-value" id="kpi-pnl-ex">—</div>
       <div class="kpi-sub" id="kpi-pnl-ex-sub">Sep 25 – today</div>
     </div>
@@ -328,15 +328,15 @@ function initKPIs() {
   const all = CATS.reduce((s,v) => s + months().reduce((ss,m) => ss + (DATA[m]?.[v.id]||0), 0), 0);
   document.getElementById('kpi-total').textContent = '€' + Math.round(all).toLocaleString();
 
-  // P&L excl. one-off (Sep 25 – latest month)
+  // P&L excl. one-off & BNB (Sep 25 – latest month)
   const pnlMs = months();
-  let totalRev = 0, totalCost = 0, totalOneOff = 0;
+  let totalRev = 0, totalCost = 0, totalExcl = 0;
   pnlMs.forEach(m => {
     totalRev  += (REVENUE[m]?.budapest||0) + (REVENUE[m]?.dubai||0);
     totalCost += CATS.reduce((s,c) => s + (DATA[m]?.[c.id]||0), 0);
-    totalOneOff += DATA[m]?.['20 - ONE OFF'] || 0;
+    totalExcl += (DATA[m]?.['20 - ONE OFF'] || 0) + (DATA[m]?.['2 - BNB'] || 0);
   });
-  const pnlEx = totalRev - (totalCost - totalOneOff);
+  const pnlEx = totalRev - (totalCost - totalExcl);
   const pnlEl = document.getElementById('kpi-pnl-ex');
   pnlEl.textContent = (pnlEx >= 0 ? '+' : '') + '€' + Math.round(pnlEx).toLocaleString();
   pnlEl.className = 'kpi-value ' + (pnlEx >= 0 ? 'green' : 'red');
