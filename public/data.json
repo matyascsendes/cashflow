@@ -172,11 +172,11 @@
     },
     "2026-06": {
       "2 - BNB": 9802.11,
-      "8 - EDUCATION": 1688.07,
+      "8 - EDUCATION": 2491.07,
       "5 - HOME & UTILITIES": 1251.63,
       "4 - FOOD & DRINK": 899.79,
       "12 - TRANSPORT": 803.42,
-      "16 - LEISURE": 650.56,
+      "16 - LEISURE": 685.56,
       "7 - ECA": 393.0,
       "10 - CLOTHING": 239.12,
       "1 - LOANS": 179.22,
@@ -184,10 +184,9 @@
       "13 - HEETS": 100.0,
       "14 - GIFT": 66.6,
       "17 - SPORT": 56.91,
-      "19 - COST OF DOING BUSINESS": 54.62,
+      "19 - COST OF DOING BUSINESS": 54.98,
       "9 - HEALTH & PERSONAL CARE": 37.26,
-      "3 - INVESTMENT": 33.74,
-      "18 - OTHER": 0.36
+      "3 - INVESTMENT": 33.74
     }
   },
   "revenue": {
@@ -232,5 +231,5 @@
       "dubai": 963
     }
   },
-  "updated": "2026-06-19T09:40:17Z"
+  "updated": "2026-06-19T11:40:35Z"
 }
